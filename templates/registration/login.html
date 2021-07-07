@@ -1,0 +1,58 @@
+{% extends 'shared/main_layout.html' %}
+{% block title %}
+    ورود به سایت
+{% endblock %}
+{% block content %}
+    <div class="container" style="font-family: '2  Homa',sans-serif">
+        <section id="form"><!--form-->
+            <div class="row">
+                {% if form.non_field_errors %}
+                    <div class="error">
+                        {% for error in form.non_field_errors %}
+                            <p class="alert alert-danger">{{ error }}</p>
+                        {% endfor %}
+
+                    </div>
+                {% endif %}
+                <div class="col-md-4  col-md-offset-4 justify-content-center">
+                    <div class="login-form"><!--login form-->
+                        <h2 style="font-family: '2  Homa',sans-serif">ورود به حساب کاربـری :</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            <span class="focus">نام کاربری :</span>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="error">
+                                    {% for error in form.username.errors %}
+                                        <p class="alert alert-danger">{{ error }}</p>
+                                    {% endfor %}
+
+                                </div>
+                            {% endif %}
+                            <span class="focus">گذرواژه :</span>
+                            {{ form.password }}
+                            {% if form.password.errors %}
+                                <div class="error">
+                                    {% for error in form.password.errors %}
+                                        <p class="alert alert-danger">{{ error }}</p>
+                                    {% endfor %}
+
+                                </div>
+                            {% endif %}
+                            <span>
+								<a class="myfont" href="{% url 'register' %}" style="text-decoration: None">ثبت نام</a>
+							</span>
+                            <br>
+                            <span>
+								<a class="myfont" href="{% url 'password_reset' %}" style="text-decoration: None">رمـز عبـور خود را فراموش کرده ام</a>
+							</span>
+                            <button style="font-family: '2  Homa',sans-serif" type="submit" class="btn btn-default">
+                                ورود
+                            </button>
+                        </form>
+                    </div><!--/login form-->
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'shared/main_layout.html' %}
+{% load render_partial %}
+
+{% block content %}
+    {% render_partial 'config2.view_components.home_sliders_components' %}
+    <section>
+        <div class="container">
+            <div class="row">
+
+                {% render_partial 'config2.view_components.best_selling_products_components' %}
+                {% render_partial 'config2.view_components.popular_articles_components' %}
+
+                <div class="col-sm-12 padding-right">
+                    {% render_partial 'config2.view_components.latest_blogs_components' %}
+
+                    {% render_partial 'config2.view_components.latest_products_components' %}
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

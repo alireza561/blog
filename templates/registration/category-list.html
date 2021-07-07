@@ -1,0 +1,71 @@
+{% extends 'registration/base.html' %}
+{% block page_title %}
+    لیست دسته بندی ها
+{% endblock %}
+{% block title %}
+    لیست دسته بندی ها
+{% endblock %}
+{% block main %}
+    <style>
+        td.position:hover {
+            cursor: pointer;
+        }
+
+        td.position:hover a {
+            color: red;
+            text-shadow: 2px 1px 2px;
+
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center">پوزیشن</th>
+                            <th>عنوان</th>
+                            <th>آدرس</th>
+                            <th>زیردسته</th>
+                            <th>آیا نمایش داده شود؟</th>
+                            <th>وضعیت</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for cat in object_list %}
+                            <tr>
+
+                                <td class="position"><a class="btn" style="width: 100%;"
+                                        href="{% url 'account:category-update' cat.pk %}">{{ cat.position }}</a>
+                                </td>
+                                <td>{{ cat.title }}</td>
+                                <td>{{ cat.slug }}</td>
+                                {% if cat.parent == None %}
+                                    <td><i class="fa fa-ban" style="color: red"></i></td>
+                                {% else %}
+                                    <td>{{ cat.parent }}</td>
+                                {% endif %}
+                                {% if cat.status == True %}
+                                    <td><i class="fa fa-check" style="color: green"></i></td>
+                                {% else %}
+                                    <td><i class="fa fa-times" style="color: red"></i></td>
+                                {% endif %}
+                                {% if user.is_superuser %}
+                                    <td><a class="badge badge-danger"
+                                           href="{% url 'account:category-delete' cat.pk %}">حذف</a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+{% endblock %}

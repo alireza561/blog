@@ -1,0 +1,30 @@
+<style>
+    .popular_articles {
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: -2px 4px 16px #e0dddd;
+        cursor: pointer;
+    }
+
+    a.popular {
+        text-decoration: None;
+        transition: color .3s;
+        margin-bottom: 5%;
+    }
+
+    a.popular:hover {
+        color: greenyellow;
+
+    }
+
+</style>
+
+
+<div class="popular_articles">
+    {% for a in popular_articles %}
+        <div>
+            <a class="popular" href="{% url 'blog:article' a.slug %}">{{ a.title }}</a>
+        </div>
+    {% endfor %}
+</div>

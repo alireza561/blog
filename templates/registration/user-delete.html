@@ -1,0 +1,35 @@
+{% extends 'registration/base.html' %}
+
+{% block page_title %}
+    حذف کاربر | {{ user.username }}
+{% endblock %}
+{% block title %}
+    کاربر : {{ user.username }}
+{% endblock %}
+{% block main %}
+    <style>
+
+        * {
+            font-family: "2  Homa", sans-serif;
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-8 text-center mx-auto ">
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title float-left mb-0">حذف کاربر</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">{% csrf_token %}
+                        <p>
+                            آیا میخواهید کاربر : <strong>{{ user.username }}</strong> را حذف کنید ؟
+                        </p>
+                        <input class="btn btn-outline-danger" type="submit" value="حذف">
+                        <a class="btn btn-outline-dark" href="{% url 'account:user-list' %}">خیر</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

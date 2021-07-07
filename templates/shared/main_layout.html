@@ -1,0 +1,21 @@
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}{{ object.title }} | فروشگاه کارزیبا{% endblock %}</title>
+    {% include 'shared/header_references.html' %}
+</head><!--/head-->
+
+<body>
+{% render_partial 'config2.view_components.site_header' %}
+{% block content %}{% endblock %}
+
+{% render_partial 'config2.view_components.site_footer' %}
+
+{% include 'shared/footer_references.html' %}
+</body>
+</html>

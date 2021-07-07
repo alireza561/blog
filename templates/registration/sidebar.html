@@ -1,0 +1,203 @@
+{% load static %}
+{% load base_tags %}
+<style>
+    a {
+        color: black;
+        transition: color .1s ease-in;
+    }
+
+    a:hover {
+
+        color: black;
+        text-decoration: none;
+        text-shadow: 1px 1px 2px;
+    }
+</style>
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+        <img src="{% static '/MyAdmin/dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo"
+             class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text">وبلاگ جنگویی من</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{% static '/MyAdmin/dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2"
+                     alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">
+                    {% if user.get_full_name %}
+                        {{ user.get_full_name }}
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-plus"></i>
+                        <p>
+                            مقالات
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'account:home' %}"
+                               class="nav-link {% if request.resolver_match.url_name == 'home' %}
+                                active
+                            {% endif %} ">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>لیست مقالات</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{% url 'account:article-create' %}"
+                               class="nav-link {% if request.resolver_match.url_name == 'article-create' %}
+                                active
+                            {% endif %}">
+                                <i class="fa fa-edit nav-icon"></i>
+                                <p>افزودن مقاله</p>
+                            </a>
+                            {#                            {% link request 'article-create' 'افزودن مقاله' %}#}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-plus"></i>
+                        <p>
+                            نظرات
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'account:comment-list' %}"
+                               class="nav-link {% if request.resolver_match.url_name == 'comment-list' %}
+                                active
+                            {% endif %} ">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>لیست نظرات</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{% url 'account:article-create' %}"
+                               class="nav-link {% if request.resolver_match.url_name == 'article-create' %}
+                                active
+                            {% endif %}">
+                                <i class="fa fa-edit nav-icon"></i>
+                                <p>افزودن نظر</p>
+                            </a>
+                            {#                            {% link request 'article-create' 'افزودن مقاله' %}#}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            {% if user.is_superuser %}
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-plus"></i>
+                            <p>
+                                کاربران
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'account:user-list' %}"
+                                   class="nav-link {% if request.resolver_match.url_name == 'user-list' %}
+                                active
+                            {% endif %}">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>لیست کاربران</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account:user-create' %}"
+                                   class="nav-link {% if request.resolver_match.url_name == 'user-create' %}
+                                active
+                            {% endif %} ">
+                                    <i class="fa fa-edit nav-icon"></i>
+                                    <p>افزودن کاربر</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            {% endif %}
+            {% if user.is_superuser %}
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-plus"></i>
+                            <p>
+                                دسته بندی ها
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'account:category-list' %}"
+                                   class="nav-link {% if request.resolver_match.url_name == 'category-list' %}
+                                active
+                            {% endif %}">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>لیست دسته بندی ها</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'account:category-create' %}"
+                                   class="nav-link {% if request.resolver_match.url_name == 'category-create' %}
+                                active
+                            {% endif %}">
+                                    <i class="fa fa-edit nav-icon"></i>
+                                    <p>افزودن دسته بندی</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            {% endif %}
+            <div class="nav-item profile">
+                <a href="{% url 'account:profile' %}" class="nav-link">
+                    <i class="nav-icon fas fa-th mr-2"></i>
+                    <p class="d-inline-block">
+                        پروفایل
+                        <span class="right badge badge-danger">جدید</span>
+                    </p>
+                </a>
+            </div>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

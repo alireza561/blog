@@ -1,0 +1,51 @@
+{% extends 'registration/base.html' %}
+{% block page_title %}
+    لیست نظرات
+{% endblock %}
+{% block title %}
+    لیست نظرات کاربران
+{% endblock %}
+{% block main %}
+    <div class="row">
+        <div class="col-12">
+            {% if object_list %}
+                <div class="card">
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>نظر</th>
+                                <th>تاریخ ثبت</th>
+                                <th>تاریخ ویرایش</th>
+                                <th>نوع محتوا</th>
+                                <th>کاربر</th>
+                                <th>ایمیل کاربر</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for comment in object_list %}
+                                <tr>
+                                    <td>{{ comment.content|striptags| truncatewords:2 }}</td>
+                                    <td>{{ comment.jposted }}</td>
+                                    <td>{{ comment.jedited }}</td>
+                                    <td>{{ comment.content_type }}</td>
+                                    <td>{{ comment.user }}</td>
+                                    <td>{{ comment.email }}</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            {% else %}
+                <div class="col-6 offset-3">
+                    <p class="alert alert-warning text-center">در حال حاضر هیچ محتوایی برای نمایش وجود ندارد</p>
+                </div>
+            {% endif %}
+            <!-- /.card -->
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'registration/base.html' %}
+{% block page_title %}
+    برگشت مقاله
+{% endblock %}
+{% block title %}
+    دلیل برگشت مقاله
+{% endblock %}
+{% block main %}
+    {% if article.status == 'b' %}
+        {% if not article.TextForAuthor%}
+            <p class="alert alert-warning">پیامی از سمت ادمین دریافت نشده</p>
+        {% else %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            {{ article.TextForAuthor | safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

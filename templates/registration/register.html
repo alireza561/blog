@@ -1,0 +1,72 @@
+{% extends 'shared/main_layout.html' %}
+{% block title %}
+    ثبت نام
+{% endblock %}
+{% block content %}
+    <div class="container" style="font-family: '2  Homa',sans-serif">
+        <section id="form"><!--form-->
+            <div class="row">
+                {% if form.non_field_errors %}
+                    <div class="error">
+                        {% for error in form.non_field_errors %}
+                            <p class="alert alert-danger">{{ error }}</p>
+                        {% endfor %}
+
+                    </div>
+                {% endif %}
+                <div class="col-md-4  col-md-offset-4 justify-content-center">
+                    <div class="login-form"><!--login form-->
+                        <h2 style="font-family: '2  Homa',sans-serif">ثبت نام :</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            <span class="focus">نام کاربری :</span>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="error">
+                                    {% for error in form.username.errors %}
+                                        <p class="alert alert-danger">{{ error }}</p>
+                                    {% endfor %}
+
+                                </div>
+                            {% endif %}
+                            <span class="focus">ایمیل :</span>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="error">
+                                    {% for error in form.email.errors %}
+                                        <p class="alert alert-danger">{{ error }}</p>
+                                    {% endfor %}
+
+                                </div>
+                            {% endif %}
+                            <span class="focus">گذرواژه :</span>
+                            {{ form.password1 }}
+                            {% if form.password1.errors %}
+                                <div class="error">
+                                    {% for error in form.password1.errors %}
+                                        <p class="alert alert-danger">{{ error }}</p>
+                                    {% endfor %}
+
+                                </div>
+                            {% endif %}
+                            <span class="focus">تایید گذرواژه :</span>
+                            {{ form.password2 }}
+                            {% if form.password2.errors %}
+                                <div class="error">
+                                    {% for error in form.password2.errors %}
+                                        <p class="alert alert-danger">{{ error }}</p>
+                                    {% endfor %}
+
+                                </div>
+                            {% endif %}
+
+                            <button style="font-family: '2  Homa',sans-serif" type="submit" class="btn btn-default">
+                                ثبت
+                            </button>
+                        </form>
+                    </div><!--/login form-->
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

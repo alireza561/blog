@@ -1,0 +1,222 @@
+{% extends 'registration/base.html' %}
+{% block page_title %}
+    لیست کاربران
+{% endblock %}
+{% block title %}
+    لیست کاربران
+{% endblock %}
+{% block main %}
+    <style>
+
+
+        tr {
+            opacity: .9;
+            transition: opacity, box-shadow .3s;
+        }
+
+        tr.user-information {
+            border: None;
+        }
+
+        tr.user-information:hover {
+            cursor: pointer;
+            opacity: 1;
+            box-shadow: inset white 5px -5px 14px;
+        {#border-top: 2px solid white;#}
+
+        }
+    </style>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>نام کاربری</th>
+                            <th>آدرس ایمیل</th>
+                            <th>نام</th>
+                            <th>نام خانوادگی</th>
+                            <th>وضعیت کارمندی</th>
+                            <th>وضعیت نویسندگی</th>
+                            <th>کاربر ویژه</th>
+                            <th>وضعیت</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in object_list %}
+                            {% if user.is_superuser %}
+                                <tr class="user-information" style="background-color: #97ffbc;">
+                                    <td><a href="{% url 'account:user-update' user.pk %}">{{ user.username }}</a></td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>
+                                        {% if user.is_staff %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_author %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_special_user %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success p-3">
+                                            <i class="fa fa-user-clock"></i>
+                                        </span>
+
+                                    </td>
+                                </tr>
+                            {% elif user.is_staff %}
+                                <tr class="user-information" style="background-color: #ff97df;">
+                                    <td><a href="{% url 'account:user-update' user.pk %}">{{ user.username }}</a></td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>
+                                        {% if user.is_staff %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_author %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_special_user %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a class="badge badge-danger p-2"
+                                           href="{% url 'account:user-delete' user.pk %}">حذف</a>
+                                    </td>
+                                </tr>
+                            {% elif user.is_author %}
+                                <tr class="user-information" style="background-color: #f77795;">
+                                    <td><a href="{% url 'account:user-update' user.pk %}">{{ user.username }}</a></td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>
+                                        {% if user.is_staff %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_author %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_special_user %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a class="badge badge-danger p-2"
+                                           href="{% url 'account:user-delete' user.pk %}">حذف</a>
+                                    </td>
+                                </tr>
+                            {% elif user.is_special_user %}
+                                <tr class="user-information" style="background-color: #b4a7de;">
+                                    <td><a href="{% url 'account:user-update' user.pk %}">{{ user.username }}</a></td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>
+                                        {% if user.is_staff %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_author %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_special_user %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a class="badge badge-danger p-2"
+                                           href="{% url 'account:user-delete' user.pk %}">حذف</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr class="user-information">
+                                    <td><a href="{% url 'account:user-update' user.pk %}">{{ user.username }}</a></td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>
+                                        {% if user.is_staff %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_author %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_special_user %}
+                                            <i class="fa fa-check green" style="color: green"></i>
+                                        {% else %}
+                                            <i class="fa fa-times" style="color: red"></i>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a class="badge badge-danger p-2"
+                                           href="{% url 'account:user-delete' user.pk %}">حذف</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+{% endblock %}

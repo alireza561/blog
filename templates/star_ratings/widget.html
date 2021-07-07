@@ -1,0 +1,6 @@
+{% extends "star_ratings/widget_base.html" %}
+{% block rating_detail %}
+    {% if not user.is_authenticated %}
+                <div style="margin-bottom:25% "><small>برای امتیاز دادن باید وارد سایت شوید : <a href="{% url 'login' %}">ورود</a></small></div>
+    {% endif %}
+{% endblock %}

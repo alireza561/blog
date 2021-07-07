@@ -1,0 +1,19 @@
+{% extends 'shared/main_layout.html' %}
+{% load render_partial %}
+{% load base_tags %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                {% block shop_content %} {% endblock %}
+                {#                {% render_partial 'config2.view_components.shop_sidebar_components' %}#}
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <h2>مقالات پربازدید</h2>
+                        {% popular_articles %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

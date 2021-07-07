@@ -1,0 +1,78 @@
+{% extends 'shared/shop_layout.html' %}
+{% load ratings %}
+{% block shop_content %}
+    <div class="col-sm-9 padding-right">
+        <div class="features_items"><!--features_items-->
+            <h2 class="title text-center">{% block title %}{% endblock %}</h2>
+            {% for article in object_list %}
+
+                <div class="col-sm-4" style="font-family: '2  Farnaz',sans-serif">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src="{{ article.thumbnail.url }}" style="height: 30vh" alt=""/>
+                                <h2>{{ article.title }}</h2>
+                                <p>نوشته شده توسط :
+                                    <a href="{% url 'blog:author' article.author %}">
+                                        {{ article.author.get_full_name }}</a>
+                                </p>
+                                <p>در تاریخ {{ article.jpublish }}</p>
+                                <a href="{% url 'blog:article' article.slug %}"
+                                   class="btn btn-default add-to-cart"><i
+                                        class="fa fa-shopping-cart"></i>نمایش</a>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+                                    <h2>{{ article.title }}</h2>
+                                    <p>{{ article.description|striptags|truncatewords:10 }}</p>
+                                    <p>نوشته شده توسط :
+                                        <a href="{% url 'blog:author' article.author %}">
+                                            {{ article.author.get_full_name }}</a>
+                                    </p>
+                                    <a href="{% url 'blog:article' article.slug %}"
+                                       class="btn btn-default add-to-cart"><i
+                                            class="fa fa-shopping-cart"></i>نمایش</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><p class="text-primary">دسته بندی : {% for cat in article.category.active %}
+                                    <a href="{% url 'category:category' cat.slug %}"> #{{ cat.title }}</a>
+                                {% endfor %}</p></li>
+                                {% if article.is_special %}
+                                    <li><p class="text-primary">ویژه</p></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <span>{% ratings article %}</span>
+                        <div style="margin-right: 1%">بازدیدها : {{ article.hits.count }}</div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+
+            {% if is_paginated %}
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li><a href="
+                                {% block previous_page_url %}{% endblock %}?page={{ page_obj.previous_page_number }}">&rArr;</a>
+                        </li>
+                    {% endif %}
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="active"><span>{{ i }}</span></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li><a href="{% block next_page_url %}{% endblock %}?page={{ page_obj.next_page_number }}">&lArr;</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div><!--features_items-->
+    </div>
+{% endblock %}
